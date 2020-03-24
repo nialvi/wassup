@@ -1,13 +1,14 @@
 import * as React from "react";
 import { Button } from "antd";
+import PageLayout from "./PageLayout";
 
 import "./index.css";
 
 function App() {
   return (
-    <div className="App">
+    <PageLayout>
       <Button type="primary">Hello world!</Button>
-    </div>
+    </PageLayout>
   );
 }
 
