@@ -3,8 +3,9 @@ import { Button } from "antd";
 import { useRouteNode } from "react-router5";
 
 const Content = () => {
+  // TODO - route = null and all crashed
   const { route } = useRouteNode("");
-  const topRouteName = route.name.split(".")[0];
+  const topRouteName = route?.name.split(".")[0];
 
   if (topRouteName === "today") {
     return <Button type="primary">Hello world!</Button>;
