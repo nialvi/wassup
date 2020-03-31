@@ -11,16 +11,16 @@ import "./index.css";
 
 const router = createRouter(store);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
+router.start(() => {
+  ReactDOM.render(
+    <Provider store={store}>
       <RouterProvider router={router}>
         <App />
       </RouterProvider>
-    </React.StrictMode>
-  </Provider>,
-  document.getElementById("root")
-);
+    </Provider>,
+    document.getElementById("root")
+  );
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

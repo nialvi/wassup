@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Button } from "antd";
-import { useRouteNode } from "react-router5";
+import { useRoute } from "react-router5";
 
 const Content = () => {
   // TODO - route = null and all crashed
-  const { route } = useRouteNode("");
+  const { route } = useRoute();
   const topRouteName = route?.name.split(".")[0];
 
   if (topRouteName === "today") {
@@ -13,6 +13,10 @@ const Content = () => {
 
   if (topRouteName === "report") {
     return <div>report</div>;
+  }
+
+  if (topRouteName === "template") {
+    return <div>template</div>;
   }
 
   return <div>not found</div>;

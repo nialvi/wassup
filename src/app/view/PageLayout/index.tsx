@@ -11,6 +11,7 @@ interface IProps {
 
 const Page = ({ children }: IProps) => {
   const { router } = useRoute();
+
   return (
     <Layout className="layout">
       <Header>
