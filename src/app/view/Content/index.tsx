@@ -1,18 +1,19 @@
 import * as React from "react";
-import { Button } from "antd";
 import { useRoute } from "react-router5";
 
+import Report from "../../Report/view";
+import Today from "../../Today/view";
+
 const Content = () => {
-  // TODO - route = null and all crashed
   const { route } = useRoute();
   const topRouteName = route?.name.split(".")[0];
 
   if (topRouteName === "today") {
-    return <Button type="primary">Hello world!</Button>;
+    return <Today />;
   }
 
   if (topRouteName === "report") {
-    return <div>report</div>;
+    return <Report />;
   }
 
   if (topRouteName === "template") {

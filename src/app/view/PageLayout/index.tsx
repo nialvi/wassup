@@ -20,7 +20,7 @@ const Page = ({ children }: IProps) => {
           className="menu"
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["2"]}
+          defaultSelectedKeys={["1"]}
         >
           <Menu.Item key="1">
             <BaseLink router={router} routeName="today">
