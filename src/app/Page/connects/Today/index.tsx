@@ -4,7 +4,8 @@ import { addEvent } from "../../../Event/entity/actionsCreators";
 import { State } from "../../usecases/reducers";
 
 const mapStateToProps = (state: State) => ({
-  events: state.events,
+  //add selector
+  events: Object.keys(state.events).map((id) => state.events[id]),
 });
 
 const mapDispatchToProps = {

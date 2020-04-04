@@ -4,23 +4,23 @@ import { format } from "date-fns";
 import { IAddEventAction } from "../../entity/actionsTypes";
 import { IEvent } from "../../entity/interface";
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Paragraph } = Typography;
 const { Option } = Select;
 
 interface IProps {
-  // TODO events: ;
+  events: IEvent[];
   addEvent: (event: IEvent) => IAddEventAction;
 }
 
 const Today = (props: IProps) => {
-  const { addEvent } = props;
+  const { addEvent, events } = props;
 
   const onAddEvent = () => {
     addEvent({
       id: "kek",
       category: "task",
       title: "title",
-      description: "desc",
+      description: ["desc"],
       date: new Date(),
     });
   };
@@ -95,35 +95,19 @@ const Today = (props: IProps) => {
 
           <div>
             <Title level={2}>Summary</Title>
-            <Title level={4}>1 - Standup</Title>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima
-              distinctio, quas ipsam nulla possimus eius, animi, molestiae
-              similique debitis repellendus voluptates? Esse eius eveniet aut
-              expedita at neque omnis officiis? <a href="//">dom tutu</a>
-            </Text>
-            <Title level={4}>2 - Demo</Title>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima
-              distinctio, quas ipsam nulla possimus eius, animi, molestiae
-            </Text>
 
-            <Title level={4}>
-              3 - <a href="//">VID-123 card</a>
-            </Title>
-            <Paragraph>
-              Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet
-              consectetur, adipisicing elit. Quo mollitia magni, quibusdam
-              aperiam explicabo
-            </Paragraph>
-            <Paragraph>
-              possimus facilis dolorum delectus aut inventore earum incidunt
-              iste eveniet dolorem optio eligendi et! Expedita, aperiam.
-            </Paragraph>
-            <Paragraph>
-              possimus facilis dolorum delectus aut inventore earum incidunt
-              iste eveniet dolorem optio eligendi et! Expedita, aperiam.
-            </Paragraph>
+            {events.map((event, index) => (
+              <React.Fragment key={event.id}>
+                <Title level={4}>
+                  {index} - {event.title}
+                </Title>
+                {event.description.map((description) => (
+                  <Paragraph key={`${event.id}_${description.length}`}>
+                    {description}
+                  </Paragraph>
+                ))}
+              </React.Fragment>
+            ))}
           </div>
         </Space>
       </Typography>
