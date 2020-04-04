@@ -7,7 +7,7 @@ import routes from "./routes";
 
 export default function configureRouter(store: Store) {
   const router = createRouter(routes, {
-    defaultRoute: "today"
+    defaultRoute: "today",
   });
 
   router.usePlugin(loggerPlugin);

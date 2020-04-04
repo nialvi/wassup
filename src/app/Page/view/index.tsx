@@ -4,7 +4,7 @@ import Content from "./Content";
 
 import "./index.css";
 
-function App() {
+function Page() {
   return (
     <PageLayout>
       <Content />
@@ -12,4 +12,4 @@ function App() {
   );
 }
 
-export default App;
+export default Page;
