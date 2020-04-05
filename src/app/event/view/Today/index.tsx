@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { IAddEventAction } from "../../entity/actionsTypes";
 import { IEvent } from "../../entity/interface";
 
+const { useState } = React;
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
 
@@ -14,20 +15,23 @@ interface IProps {
 
 const Today = (props: IProps) => {
   const { addEvent, events } = props;
+  const [eventCategory, setEventCategory] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
 
   const onAddEvent = () => {
     addEvent({
       id: "kek",
-      category: "task",
-      title: "title",
-      description: ["desc"],
+      category: eventCategory,
+      title: eventName,
+      description: [eventDescription],
       date: new Date(),
     });
-  };
 
-  function onChange(value: string) {
-    console.log(`selected ${value}`);
-  }
+    setEventCategory("");
+    setEventName("");
+    setEventDescription("");
+  };
 
   function onBlur() {
     console.log("blur");
@@ -41,56 +45,62 @@ const Today = (props: IProps) => {
     console.log("search:", val);
   }
 
+  const onChangeSelect = (value: string) => {
+    setEventCategory(value);
+  };
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEventName(e.target.value);
+  };
+
+  const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setEventDescription(e.target.value);
+  };
+
   return (
     <div>
       <Typography>
-        <Title>{format(new Date(), "<yyyy/MM/dd>")}</Title>
+        <Title>{format(new Date(), "yyyy/MM/dd")}</Title>
         <Space size={50} direction="vertical">
           <div>
             <Title level={2}>New task</Title>
-            <Select
-              placeholder="category"
-              showSearch
-              style={{
-                display: "inline-block",
-                width: 200,
-                marginBottom: "10px",
-              }}
-              optionFilterProp="children"
-              onChange={onChange}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onSearch={onSearch}
-              filterOption={(input, option) =>
-                option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value="jack">Task</Option>
-              <Option value="lucy">Meetup</Option>
-              <Option value="tom">common</Option>
-            </Select>
-            <Select
-              placeholder="name"
-              showSearch
-              style={{ width: 200, marginBottom: "10px" }}
-              optionFilterProp="children"
-              onChange={onChange}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onSearch={onSearch}
-              filterOption={(input, option) =>
-                option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value="jack">VID-123</Option>
-              <Option value="lucy">FE Meetup</Option>
-              <Option value="tom">1to1</Option>
-            </Select>
-            <Input.TextArea
-              style={{ marginBottom: "10px" }}
-              placeholder="description"
-            />
-            <Button onClick={() => onAddEvent()}>Add</Button>
+            <Space size="small" direction="vertical">
+              <Select
+                placeholder="category"
+                showSearch
+                style={{
+                  display: "inline-block",
+                  width: 200,
+                }}
+                optionFilterProp="children"
+                onChange={onChangeSelect}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+                filterOption={(input, option) =>
+                  option?.children.toLowerCase().indexOf(input.toLowerCase()) >=
+                  0
+                }
+                value={eventCategory}
+              >
+                <Option value="task">Task</Option>
+                <Option value="meetup">Meetup</Option>
+                <Option value="other">other</Option>
+              </Select>
+
+              <Input
+                placeholder="name"
+                value={eventName}
+                onChange={onChangeInput}
+              />
+
+              <Input.TextArea
+                placeholder="description"
+                value={eventDescription}
+                onChange={onChangeTextArea}
+              />
+              <Button onClick={onAddEvent}>Add</Button>
+            </Space>
           </div>
 
           <div>
