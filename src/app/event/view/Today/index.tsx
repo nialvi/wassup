@@ -2,14 +2,14 @@ import * as React from "react";
 import { Typography, Select, Input, Button, Space } from "antd";
 import { format } from "date-fns";
 import { IAddEventAction } from "../../entity/actionsTypes";
-import { IEvent } from "../../entity/interface";
+import { IEvent, ISystemEvent } from "../../entity/interface";
 
 const { useState } = React;
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
 
 interface IProps {
-  events: IEvent[];
+  events: ISystemEvent[];
   addEvent: (event: IEvent) => IAddEventAction;
 }
 
@@ -21,11 +21,9 @@ const Today = (props: IProps) => {
 
   const onAddEvent = () => {
     addEvent({
-      id: "kek",
       category: eventCategory,
       title: eventName,
-      description: [eventDescription],
-      date: new Date(),
+      description: eventDescription,
     });
 
     setEventCategory("");

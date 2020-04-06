@@ -1,9 +1,9 @@
-import { IEvent } from "./interface";
+import { IEvent, ISystemEvent } from "./interface";
 
 export interface ISetEventAction {
   type: typeof SET_EVENTS;
   payload: {
-    events: IEvent[];
+    events: ISystemEvent[];
   };
 }
 

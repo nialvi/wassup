@@ -1,7 +1,11 @@
 export interface IEvent {
-  id: string;
   category: string;
   title: string;
-  description: string[];
+  description: string;
+}
+
+export interface ISystemEvent extends IEvent {
+  id: string;
   date: Date;
+  description: string[];
 }
