@@ -6,26 +6,12 @@ type Dictionary<T> = {
 };
 
 const inititalState: Dictionary<ISystemEvent> = {
-  "task_VID-123-card": {
-    id: "task_VID-123-card", // md5(category, title, date)
-    category: "task",
-    title: "VID-123-card",
-    description: ["Lorem ipsum dolor sit amet,", "Lorem ipsum dolor"],
-    date: new Date(), // YYYY-mm-dd
-  },
   meetup_standup: {
     id: "meetup_standup",
     category: "meetup",
     title: "standup",
-    description: ["Lorem ipsum dolor sit amet,"],
-    date: new Date(),
-  },
-  meetup_demo: {
-    id: "meetup_demo",
-    category: "meetup",
-    title: "demo",
-    description: ["Lorem ipsum dolor sit amet,"],
-    date: new Date(),
+    description: ["This is example event with templated description"],
+    date: "2020-03-30",
   },
 };
 
@@ -54,7 +40,8 @@ export default (state = inititalState, action: EventActionTypes) => {
 
       const systemEvent: ISystemEvent = {
         id,
-        date: new Date(),
+        // TODO change on normal date
+        date: "2020-03-30",
         description: newDescription,
         ...restEvent,
       };

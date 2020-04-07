@@ -6,6 +6,6 @@ export interface IEvent {
 
 export interface ISystemEvent extends IEvent {
   id: string;
-  date: Date;
+  date: string;
   description: string[];
 }

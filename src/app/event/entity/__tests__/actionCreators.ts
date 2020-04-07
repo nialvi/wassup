@@ -13,7 +13,7 @@ const events: Events = {
     category: "task",
     title: "VID-123-card",
     description: ["Lorem ipsum dolor sit amet,", "Lorem ipsum dolor"],
-    date: new Date(),
+    date: "2020-03-30",
   },
   user: {
     category: "task",
