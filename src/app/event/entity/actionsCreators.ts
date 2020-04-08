@@ -1,4 +1,4 @@
-import { IEvent, ISystemEvent } from "./interface";
+import { IEvent, SystemEvents } from "./interface";
 import {
   IAddEventAction,
   ISetEventAction,
@@ -6,7 +6,7 @@ import {
   ADD_EVENT,
 } from "./actionsTypes";
 
-export const setEvents = (events: ISystemEvent[]): ISetEventAction => ({
+export const setEvents = (events: SystemEvents): ISetEventAction => ({
   type: SET_EVENTS,
   payload: {
     events,

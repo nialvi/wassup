@@ -1,3 +1,5 @@
+import { Dictionary } from "../../utils/types";
+
 export interface IEvent {
   category: string;
   title: string;
@@ -9,3 +11,5 @@ export interface ISystemEvent extends IEvent {
   date: string;
   description: string[];
 }
+
+export type SystemEvents = Dictionary<ISystemEvent>

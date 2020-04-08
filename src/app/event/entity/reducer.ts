@@ -1,11 +1,7 @@
-import { ISystemEvent } from "./interface";
+import { ISystemEvent, SystemEvents } from "./interface";
 import { SET_EVENTS, ADD_EVENT, EventActionTypes } from "./actionsTypes";
 
-type Dictionary<T> = {
-  [hash: string]: T;
-};
-
-const inititalState: Dictionary<ISystemEvent> = {
+const inititalState: SystemEvents = {
   meetup_standup: {
     id: "meetup_standup",
     category: "meetup",
@@ -21,11 +17,8 @@ export default (state = inititalState, action: EventActionTypes) => {
       const {
         payload: { events },
       } = action;
-      const eventsState = events.map((event) => {
-        return { [`${event.id}`]: event };
-      });
 
-      return { ...state, ...eventsState };
+      return { ...state, ...events };
     }
 
     case ADD_EVENT: {
