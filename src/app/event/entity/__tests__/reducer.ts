@@ -1,8 +1,8 @@
 import reducer from "../reducer";
-import { EventActionTypes, SET_EVENTS } from "../actionsTypes";
+import { EventActionTypes } from "../actionsTypes";
 import * as actions from "../actionsCreators";
 
-const inititalEvent = {
+const inititalState = {
   meetup_standup: {
     id: "meetup_standup",
     category: "meetup",
@@ -12,7 +12,7 @@ const inititalEvent = {
   },
 };
 
-const newEvent = {
+const systemEvent = {
   meetup_demo: {
     id: "meetup_demo",
     category: "meetup",
@@ -22,23 +22,31 @@ const newEvent = {
   },
 };
 
+const userEvent = {
+  category: "meetup",
+  title: "demo",
+  description: "This is example event with templated description",
+};
+
 const expectedSystemEvents = {
-  ...inititalEvent,
-  ...newEvent,
+  ...inititalState,
+  ...systemEvent,
 };
 
 describe("reducer", () => {
   it("should return initial state", () => {
-    expect(reducer(undefined, {} as EventActionTypes)).toEqual(inititalEvent);
+    expect(reducer(undefined, {} as EventActionTypes)).toEqual(inititalState);
   });
 
   it("should handle SET_EVENTS", () => {
-    const state = reducer(undefined, actions.setEvents(newEvent));
+    const state = reducer(undefined, actions.setEvents(systemEvent));
 
     expect(state).toEqual(expectedSystemEvents);
   });
 
   it("should handle ADD_EVENT", () => {
-    // TODO
+    const state = reducer(undefined, actions.addEvent(userEvent));
+
+    expect(state).toEqual(expectedSystemEvents);
   });
 });

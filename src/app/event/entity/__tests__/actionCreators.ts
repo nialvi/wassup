@@ -1,19 +1,22 @@
 import * as actions from "../actionsCreators";
 import * as actionTypes from "../actionsTypes";
 import { ISystemEvent, IEvent } from "../interface";
+import { Dictionary } from "../../../utils/types";
 
 type Events = {
-  system: ISystemEvent;
+  system: Dictionary<ISystemEvent>;
   user: IEvent;
 };
 
 const events: Events = {
   system: {
-    id: "task_VID-123-card",
-    category: "task",
-    title: "VID-123-card",
-    description: ["Lorem ipsum dolor sit amet,", "Lorem ipsum dolor"],
-    date: "2020-03-30",
+    "task_VID-123-card": {
+      id: "task_VID-123-card",
+      category: "task",
+      title: "VID-123-card",
+      description: ["Lorem ipsum dolor sit amet,", "Lorem ipsum dolor"],
+      date: "2020-03-30",
+    },
   },
   user: {
     category: "task",
@@ -38,10 +41,10 @@ describe("actions", () => {
     const expectedAction = {
       type: actionTypes.SET_EVENTS,
       payload: {
-        events: [events.system],
+        events: events.system,
       },
     };
 
-    expect(actions.setEvents([events.system])).toEqual(expectedAction);
+    expect(actions.setEvents(events.system)).toEqual(expectedAction);
   });
 });
