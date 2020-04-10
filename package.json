@@ -27,8 +27,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll=false",
-    "test:coverage": "react-scripts test -- --config='./jest.config.js'",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
     "eject": "react-scripts eject"
   },
@@ -66,6 +66,7 @@
       }
     },
     "coverageReporters": [
+      "html",
       "text"
     ]
   }

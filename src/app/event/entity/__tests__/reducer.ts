@@ -28,6 +28,25 @@ const userEvent = {
   description: "This is example event with templated description",
 };
 
+const userExistedEvent = {
+  category: "meetup",
+  title: "standup",
+  description: "This is additional description",
+};
+
+const expectedStateWithExistedEvent = {
+  meetup_standup: {
+    id: "meetup_standup",
+    category: "meetup",
+    title: "standup",
+    description: [
+      "This is example event with templated description",
+      "This is additional description",
+    ],
+    date: "2020-03-30",
+  },
+};
+
 const expectedSystemEvents = {
   ...inititalState,
   ...systemEvent,
@@ -48,5 +67,11 @@ describe("reducer", () => {
     const state = reducer(undefined, actions.addEvent(userEvent));
 
     expect(state).toEqual(expectedSystemEvents);
+  });
+
+  it("should add description to existed event", () => {
+    const state = reducer(undefined, actions.addEvent(userExistedEvent));
+
+    expect(state).toEqual(expectedStateWithExistedEvent);
   });
 });
