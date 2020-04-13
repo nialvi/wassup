@@ -97,7 +97,9 @@ const Today = (props: IProps) => {
                 value={eventDescription}
                 onChange={onChangeTextArea}
               />
-              <Button onClick={onAddEvent}>Add</Button>
+              <Button data-testid="add-event-button" onClick={onAddEvent}>
+                Add
+              </Button>
             </Space>
           </div>
 

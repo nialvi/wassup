@@ -32,4 +32,15 @@ describe("Today view", () => {
     expect(getByText("New task")).toBeInTheDocument();
     expect(getByText("Summary")).toBeInTheDocument();
   });
+
+  it("addEvent action should called", () => {
+    const mockAddEvent = jest.fn(addEvent);
+    const { getByTestId } = render(
+      <Today events={events} addEvent={mockAddEvent} />
+    );
+
+    getByTestId("add-event-button").click();
+
+    expect(mockAddEvent).toHaveBeenCalled();
+  });
 });
