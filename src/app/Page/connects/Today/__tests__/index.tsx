@@ -27,7 +27,7 @@ const systemEvents = {
   },
 };
 
-describe("Today view", () => {
+describe("Today connect", () => {
   it("static titles are corrected", () => {
     const store = createStore(combineReducers({ events }), {
       events: systemEvents,

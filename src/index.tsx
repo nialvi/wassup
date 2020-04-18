@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router5";
-import createRouter from "./App/Page/route/create-router";
+import createRouter from "./App/Page/route/createRouter";
 import App from "./App/Page/view";
 import * as serviceWorker from "./serviceWorker";
 import { store } from "./App/Page/store";
