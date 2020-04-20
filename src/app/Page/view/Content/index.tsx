@@ -5,7 +5,7 @@ import Report from "../../../Report/view";
 import Today from "../../connects/Today";
 
 const Content = () => {
-  const { route } = useRoute();
+  const { route } = useRoute() || {};
   const topRouteName = route?.name.split(".")[0];
 
   if (topRouteName === "today") {

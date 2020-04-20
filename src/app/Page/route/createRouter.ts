@@ -5,7 +5,7 @@ import browserPlugin from "router5-plugin-browser";
 import { reduxPlugin } from "redux-router5";
 import routes from "./routes";
 
-export default function configureRouter(store: Store) {
+export default function configureRouter(store?: Store) {
   const router = createRouter(routes, {
     defaultRoute: "today",
   });
@@ -14,7 +14,9 @@ export default function configureRouter(store: Store) {
 
   router.usePlugin(browserPlugin());
 
-  router.usePlugin(reduxPlugin(store.dispatch));
+  if (store) {
+    router.usePlugin(reduxPlugin(store.dispatch));
+  }
 
   return router;
 }
