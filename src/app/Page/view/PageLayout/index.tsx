@@ -6,11 +6,11 @@ import "./index.css";
 const { Header, Content, Footer } = Layout;
 
 interface IProps {
-  children: JSX.Element;
+  children: string | JSX.Element;
 }
 
 const Page = ({ children }: IProps) => {
-  const { router } = useRoute();
+  const { router } = useRoute() || {};
 
   return (
     <Layout className="layout">
