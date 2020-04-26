@@ -26,3 +26,19 @@ router.start(() => {
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 // serviceWorker.unregister();
+
+const request = window.indexedDB.open("MyTestDB", 2);
+
+request.onerror = function (event) {
+  console.error("error", event);
+};
+
+request.onsuccess = function (event: any) {
+  console.log("indexedDB is successed work");
+};
+
+request.onupgradeneeded = function (event) {
+  const db = request.result;
+  db.createObjectStore("events");
+  console.log("onupgrade", event);
+};
