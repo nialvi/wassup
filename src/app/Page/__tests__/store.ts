@@ -1,4 +1,4 @@
-import { store } from "../store";
+import { configureStore } from "../store";
 import { inititalState as initialStateEvent } from "../../Event/entity/reducer";
 
 const initialState = {
@@ -15,6 +15,7 @@ const initialState = {
 
 describe("store", () => {
   it("initial state", () => {
+    const store = configureStore();
     expect(store.getState()).toEqual(initialState);
   });
 });

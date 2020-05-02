@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router5";
 import Report from "..";
-import { store } from "../../../Page/store";
+import { configureStore } from "../../../Page/store";
 import createRouter from "../../../Page/route/createRouter";
 
 describe("Report view", () => {
@@ -15,6 +15,7 @@ describe("Report view", () => {
   // });
 
   it("render report without router provider", () => {
+    const store = configureStore();
     const router = createRouter(store);
 
     router.start("/report");
@@ -31,6 +32,7 @@ describe("Report view", () => {
   });
 
   it("render report without router provider", () => {
+    const store = configureStore();
     const router = createRouter(store);
 
     router.start("/report/all");

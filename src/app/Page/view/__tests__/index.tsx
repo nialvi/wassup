@@ -3,11 +3,12 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router5";
 import Page from "../index";
-import { store } from "../../store";
+import { configureStore } from "../../store";
 import createRouter from "../../route/createRouter";
 
 describe("Page view", () => {
   it("should be render", () => {
+    const store = configureStore();
     const router = createRouter(store);
 
     router.start();

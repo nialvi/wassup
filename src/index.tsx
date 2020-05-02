@@ -2,13 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router5";
+import createSagaMiddleware from "redux-saga";
 import createRouter from "./App/Page/route/createRouter";
 import App from "./App/Page/view";
 // import * as serviceWorker from "./serviceWorker";
-import { store } from "./App/Page/store";
-
+import { configureStore } from "./App/Page/store";
+import mySaga from "./App/Event/usecases/addEvent/saga";
 import "./index.css";
 
+const sagaMiddleware = createSagaMiddleware();
+const store = configureStore([sagaMiddleware]);
 const router = createRouter(store);
 
 router.start(() => {
@@ -18,9 +21,14 @@ router.start(() => {
         <App />
       </RouterProvider>
     </Provider>,
-    document.getElementById("root")
+    document.getElementById("root"),
+    () => {
+      console.log("after render");
+    }
   );
 });
+
+sagaMiddleware.run(mySaga);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
