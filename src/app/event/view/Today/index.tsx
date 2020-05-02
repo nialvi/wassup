@@ -59,67 +59,66 @@ const Today = (props: IProps) => {
     <div>
       <Typography>
         <Title>{format(new Date(), "yyyy/MM/dd")}</Title>
-        <Space size={50} direction="vertical">
-          <div>
-            <Title level={2}>New task</Title>
-            <Space size="small" direction="vertical">
-              <Select
-                placeholder="category"
-                showSearch
-                style={{
-                  display: "inline-block",
-                  width: 200,
-                }}
-                optionFilterProp="children"
-                onChange={onChangeSelect}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  option?.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-                value={eventCategory}
-              >
-                <Option value="task">Task</Option>
-                <Option value="meetup">Meetup</Option>
-                <Option value="other">other</Option>
-              </Select>
+        {/* <Space size={50} direction="vertical"> */}
+        <div>
+          <Title level={2}>New task</Title>
+          {/* <Space size="small" direction="vertical"> */}
+          <Select
+            placeholder="category"
+            showSearch
+            style={{
+              display: "inline-block",
+              width: 200,
+            }}
+            optionFilterProp="children"
+            onChange={onChangeSelect}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onSearch={onSearch}
+            filterOption={(input, option) =>
+              option?.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            value={eventCategory}
+          >
+            <Option value="task">Task</Option>
+            <Option value="meetup">Meetup</Option>
+            <Option value="other">other</Option>
+          </Select>
 
-              <Input
-                placeholder="name"
-                value={eventName}
-                onChange={onChangeInput}
-              />
+          <Input
+            placeholder="name"
+            value={eventName}
+            onChange={onChangeInput}
+          />
 
-              <Input.TextArea
-                placeholder="description"
-                value={eventDescription}
-                onChange={onChangeTextArea}
-              />
-              <Button data-testid="add-event-button" onClick={onAddEvent}>
-                Add
-              </Button>
-            </Space>
-          </div>
+          <Input.TextArea
+            placeholder="description"
+            value={eventDescription}
+            onChange={onChangeTextArea}
+          />
+          <Button data-testid="add-event-button" onClick={onAddEvent}>
+            Add
+          </Button>
+          {/* </Space> */}
+        </div>
 
-          <div>
-            <Title level={2}>Summary</Title>
+        <div>
+          <Title level={2}>Summary</Title>
 
-            {events.map((event, index) => (
-              <React.Fragment key={event.id}>
-                <Title level={4}>
-                  {index} - {event.title}
-                </Title>
-                {event.description.map((description) => (
-                  <Paragraph key={`${event.id}_${description.length}`}>
-                    {description}
-                  </Paragraph>
-                ))}
-              </React.Fragment>
-            ))}
-          </div>
-        </Space>
+          {events.map((event, index) => (
+            <React.Fragment key={event.id}>
+              <Title level={4}>
+                {index} - {event.title}
+              </Title>
+              {event.description.map((description) => (
+                <Paragraph key={`${event.id}_${description.length}`}>
+                  {description}
+                </Paragraph>
+              ))}
+            </React.Fragment>
+          ))}
+        </div>
+        {/* </Space> */}
       </Typography>
     </div>
   );
