@@ -1,64 +1,41 @@
-// TODO use package idb
-// import { openDB } from "idb";
+import { openDB } from "idb";
 
-export function createStorage() {
-  const requestOpenDB = window.indexedDB.open("MyTestDB", 3);
+export async function createStorage() {
+  const db = await openDB("MyTestDB", 1, {
+    upgrade(db, oldVersion, newVersion, transaction) {
+      if (!db.objectStoreNames.contains("events")) {
+        db.createObjectStore("events", { keyPath: "id" });
+      }
 
-  requestOpenDB.onerror = function (event) {
-    console.error("error", event);
-  };
+      if (!db.objectStoreNames.contains("reports")) {
+        db.createObjectStore("reports", { keyPath: "id" });
+      }
 
-  requestOpenDB.onsuccess = function () {
-    const db = requestOpenDB.result;
+      let eventStore = db
+        .transaction("events", "readwrite")
+        .objectStore("events");
 
-    const transaction = db.transaction("events", "readwrite");
+      let event = {
+        id: "meetup_standup",
+        category: "meetup",
+        title: "standup",
+        description: [
+          "This is example event with templated description",
+          "This is additional description",
+        ],
+        date: "2020-03-30",
+      };
 
-    let eventsTransaction = transaction.objectStore("events");
+      eventStore.put(event);
 
-    let event = {
-      id: "meetup_standup",
-      category: "meetup",
-      title: "standup",
-      description: [
-        "This is example event with templated description",
-        "This is additional description",
-      ],
-      date: "2020-03-30",
-    };
-
-    let requestAddEvent = eventsTransaction.put(event);
-
-    requestAddEvent.onsuccess = function (event) {
-      console.log("event added", requestAddEvent.result);
-    };
-
-    requestAddEvent.onerror = function (event) {
-      console.log("error", requestAddEvent.error);
-    };
-
-    db.onversionchange = function () {
-      db.close();
+      console.log("onupgrade");
+    },
+    blocked() {
+      // handle the case when an old connection wasn't closed after db.onversionchange triggered
+    },
+    blocking() {
       alert("Database is outdated, please reload the page.");
-    };
-
-    console.log("indexedDB is successed work");
-  };
-
-  requestOpenDB.onupgradeneeded = function (event) {
-    const db = requestOpenDB.result;
-
-    if (!db.objectStoreNames.contains("events")) {
-      db.createObjectStore("events", { keyPath: "id" });
-    }
-
-    if (!db.objectStoreNames.contains("reports")) {
-      db.createObjectStore("reports", { keyPath: "id" });
-    }
-
-    console.log("onupgrade", event);
-  };
-
-  requestOpenDB.onblocked = function () {
-    // handle the case when an old connection wasn't closed after db.onversionchange triggered
-  };
+    },
+  });
+  console.log("idb inited");
 }
