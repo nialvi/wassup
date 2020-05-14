@@ -5,5 +5,5 @@ import { loadData } from "./loadData";
 
 export function* initPage() {
   yield takeLatest("ON_INIT", createStorage);
-  yield takeLatest("ON_INIT", loadData);
+  yield takeLatest("AFTER_DB_INITED", loadData);
 }
