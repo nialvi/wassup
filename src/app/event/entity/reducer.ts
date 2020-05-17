@@ -1,15 +1,7 @@
 import { ISystemEvent, SystemEvents } from "./interface";
 import { SET_EVENTS, ADD_EVENT, EventActionTypes } from "./actionsTypes";
 
-export const inititalState: SystemEvents = {
-  meetup_standup: {
-    id: "meetup_standup",
-    category: "meetup",
-    title: "standup",
-    description: ["This is example event with templated description"],
-    date: "2020-03-30",
-  },
-};
+export const inititalState: SystemEvents = {};
 
 export default (state = inititalState, action: EventActionTypes) => {
   switch (action.type) {

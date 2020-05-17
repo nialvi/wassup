@@ -105,10 +105,14 @@ const Today = (props: IProps) => {
         <div>
           <Title level={2}>Summary</Title>
 
+          {events.length === 0 && (
+            <Title level={4}>Soon new tasks will appear here</Title>
+          )}
+
           {events.map((event, index) => (
             <React.Fragment key={event.id}>
               <Title level={4}>
-                {index} - {event.title}
+                {index + 1} - {event.title}
               </Title>
               {event.description.map((description) => (
                 <Paragraph key={`${event.id}_${description.length}`}>

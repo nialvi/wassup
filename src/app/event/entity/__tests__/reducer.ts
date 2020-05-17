@@ -2,15 +2,7 @@ import reducer from "../reducer";
 import { EventActionTypes } from "../actionsTypes";
 import * as actions from "../actionsCreators";
 
-const inititalState = {
-  meetup_standup: {
-    id: "meetup_standup",
-    category: "meetup",
-    title: "standup",
-    description: ["This is example event with templated description"],
-    date: "2020-03-30",
-  },
-};
+const inititalState = {};
 
 const systemEvent = {
   meetup_demo: {
@@ -22,9 +14,15 @@ const systemEvent = {
   },
 };
 
-const userEvent = {
+const userDemoEvent = {
   category: "meetup",
   title: "demo",
+  description: "This is example event with templated description",
+};
+
+const userStandupEvent = {
+  category: "meetup",
+  title: "standup",
   description: "This is example event with templated description",
 };
 
@@ -64,14 +62,15 @@ describe("reducer", () => {
   });
 
   it("should handle ADD_EVENT", () => {
-    const state = reducer(undefined, actions.addEvent(userEvent));
+    const state = reducer(undefined, actions.addEvent(userDemoEvent));
 
     expect(state).toEqual(expectedSystemEvents);
   });
 
   it("should add description to existed event", () => {
-    const state = reducer(undefined, actions.addEvent(userExistedEvent));
+    const firstState = reducer(undefined, actions.addEvent(userStandupEvent));
+    const finalState = reducer(firstState, actions.addEvent(userExistedEvent));
 
-    expect(state).toEqual(expectedStateWithExistedEvent);
+    expect(finalState).toEqual(expectedStateWithExistedEvent);
   });
 });
