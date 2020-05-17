@@ -4,16 +4,26 @@ import { IAddEventAction } from "../../Event/entity/actionsTypes";
 
 export function* addDataIntoDb(action: IAddEventAction) {
   const { event } = action.payload;
-
-  let data = {
-    ...event,
-    id: `${event.category}_${event.title}_${Math.random()}`,
-    date: "2020-03-30",
-    // TODO same logic from reducer addEvent
-    description: [event.description],
-  };
-
+  const id = `${event.category}_${event.title}`;
+  let data;
   const db = yield openDB("MyTestDB", 1);
+  const eventFromDb = yield db.get("events", id);
+
+  if (eventFromDb) {
+    data = {
+      ...eventFromDb,
+      description: [...eventFromDb.description, event.description],
+    };
+
+    yield db.delete("events", id);
+  } else {
+    data = {
+      ...event,
+      id: `${event.category}_${event.title}`,
+      date: "2020-03-30",
+      description: [event.description],
+    };
+  }
 
   yield db.add("events", data);
 }

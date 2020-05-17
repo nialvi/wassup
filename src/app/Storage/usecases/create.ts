@@ -22,20 +22,6 @@ export function* createStorage() {
     },
   });
 
-  // TODO delete this
-  let event = {
-    id: `meetup_standup_${Math.random()}`,
-    category: "meetup",
-    title: "standup",
-    description: [
-      "This is example event with templated description",
-      "This is additional description from creating indexdb",
-    ],
-    date: "2020-03-30",
-  };
-
-  yield db.add("events", event);
-
   const events = yield db.getAll("events");
 
   yield put({ type: "AFTER_DB_INITED", payload: { events } });
