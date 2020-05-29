@@ -4,12 +4,12 @@ export interface IEvent {
   category: string;
   title: string;
   description: string;
+  date: string;
 }
 
 export interface ISystemEvent extends IEvent {
   id: string;
-  date: string;
   description: string[];
 }
 
-export type SystemEvents = Dictionary<ISystemEvent>
+export type SystemEvents = Dictionary<ISystemEvent>;

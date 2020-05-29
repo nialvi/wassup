@@ -2,6 +2,7 @@ import * as actions from "../actionsCreators";
 import * as actionTypes from "../actionsTypes";
 import { ISystemEvent, IEvent } from "../interface";
 import { Dictionary } from "../../../utils/types";
+import { format } from "date-fns";
 
 type Events = {
   system: Dictionary<ISystemEvent>;
@@ -15,13 +16,14 @@ const events: Events = {
       category: "task",
       title: "VID-123-card",
       description: ["Lorem ipsum dolor sit amet,", "Lorem ipsum dolor"],
-      date: "2020-03-30",
+      date: format(new Date(), "yyyy-MM-dd"),
     },
   },
   user: {
     category: "task",
     title: "VID-123-card",
     description: "Lorem ipsum dolor sit amet,",
+    date: format(new Date(), "yyyy-MM-dd"),
   },
 };
 

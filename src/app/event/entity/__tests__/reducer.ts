@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import reducer from "../reducer";
 import { EventActionTypes } from "../actionsTypes";
 import * as actions from "../actionsCreators";
@@ -10,7 +11,7 @@ const systemEvent = {
     category: "meetup",
     title: "demo",
     description: ["This is example event with templated description"],
-    date: "2020-03-30",
+    date: format(new Date(), "yyyy-MM-dd"),
   },
 };
 
@@ -18,18 +19,21 @@ const userDemoEvent = {
   category: "meetup",
   title: "demo",
   description: "This is example event with templated description",
+  date: format(new Date(), "yyyy-MM-dd"),
 };
 
 const userStandupEvent = {
   category: "meetup",
   title: "standup",
   description: "This is example event with templated description",
+  date: format(new Date(), "yyyy-MM-dd"),
 };
 
 const userExistedEvent = {
   category: "meetup",
   title: "standup",
   description: "This is additional description",
+  date: format(new Date(), "yyyy-MM-dd"),
 };
 
 const expectedStateWithExistedEvent = {
@@ -41,7 +45,7 @@ const expectedStateWithExistedEvent = {
       "This is example event with templated description",
       "This is additional description",
     ],
-    date: "2020-03-30",
+    date: format(new Date(), "yyyy-MM-dd"),
   },
 };
 

@@ -25,8 +25,6 @@ export default (state = inititalState, action: EventActionTypes) => {
 
       const systemEvent: ISystemEvent = {
         id,
-        // TODO change on normal date
-        date: "2020-03-30",
         description: newDescription,
         ...restEvent,
       };

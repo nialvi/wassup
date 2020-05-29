@@ -24,6 +24,7 @@ const Today = (props: IProps) => {
       category: eventCategory,
       title: eventName,
       description: eventDescription,
+      date: format(new Date(), "yyyy-MM-dd"),
     });
 
     setEventCategory("");

@@ -20,7 +20,6 @@ export function* addDataIntoDb(action: IAddEventAction) {
     data = {
       ...event,
       id: `${event.category}_${event.title}`,
-      date: "2020-03-30",
       description: [event.description],
     };
   }
