@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRoute } from "react-router5";
 
-import Report from "../../../Report/view";
+import Report from "../../connects/Report";
 import Today from "../../connects/Today";
 
 const Content = () => {

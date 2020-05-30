@@ -28,7 +28,7 @@ describe("Report view", () => {
       </Provider>
     );
 
-    expect(getByText("report")).toBeInTheDocument();
+    expect(getByText("Weekly report")).toBeInTheDocument();
   });
 
   it("render report without router provider", () => {
