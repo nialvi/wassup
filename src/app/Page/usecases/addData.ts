@@ -4,7 +4,7 @@ import { IAddEventAction } from "../../Event/entity/actionsTypes";
 
 export function* addDataIntoDb(action: IAddEventAction) {
   const { event } = action.payload;
-  const id = `${event.category}_${event.title}`;
+  const id = `${event.category}_${event.title}_${event.date}`;
   let data;
   const db = yield openDB("MyTestDB", 1);
   const eventFromDb = yield db.get("events", id);
@@ -19,7 +19,7 @@ export function* addDataIntoDb(action: IAddEventAction) {
   } else {
     data = {
       ...event,
-      id: `${event.category}_${event.title}`,
+      id,
       description: [event.description],
     };
   }
