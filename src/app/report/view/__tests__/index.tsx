@@ -6,6 +6,26 @@ import Report from "..";
 import { configureStore } from "../../../Page/store";
 import createRouter from "../../../Page/route/createRouter";
 
+const events = [
+  {
+    id: "meetup_demo",
+    category: "meetup",
+    title: "demo",
+    description: ["This is example event with templated description"],
+    date: "2020-03-30",
+  },
+  {
+    id: "meetup_standup",
+    category: "meetup",
+    title: "standup",
+    description: [
+      "This is example event with templated description",
+      "Another one",
+    ],
+    date: "2020-03-30",
+  },
+];
+
 describe("Report view", () => {
   // TODO fix this test
   // it("render report without router provider", () => {
@@ -23,7 +43,7 @@ describe("Report view", () => {
     const { getByText } = render(
       <Provider store={store}>
         <RouterProvider router={router}>
-          <Report />
+          <Report events={events} />
         </RouterProvider>
       </Provider>
     );
@@ -40,7 +60,7 @@ describe("Report view", () => {
     const { getByText } = render(
       <Provider store={store}>
         <RouterProvider router={router}>
-          <Report />
+          <Report events={events} />
         </RouterProvider>
       </Provider>
     );
