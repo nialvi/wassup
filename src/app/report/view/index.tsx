@@ -3,18 +3,21 @@ import { Typography } from "antd";
 import { useRouteNode } from "react-router5";
 
 import { ISystemEvent } from "../../Event/entity/interface";
+import { getTitle } from "./helper";
 
 const { Title, Text } = Typography;
 
 interface IProps {
   events: ISystemEvent[];
+  startDay: number;
+  endDay: number;
 }
 
 interface IEventByCategories {
   [key: string]: ISystemEvent[];
 }
 
-const Report = ({ events }: IProps) => {
+const Report = ({ events, startDay, endDay }: IProps) => {
   const { route } = useRouteNode("report") || {};
 
   // TODO move to another view
@@ -38,7 +41,7 @@ const Report = ({ events }: IProps) => {
   return (
     <div>
       <Typography>
-        <Title>Weekly report</Title>
+        <Title>{getTitle(startDay, endDay)}</Title>
 
         {Object.keys(eventByCategories).map((category) => {
           return (

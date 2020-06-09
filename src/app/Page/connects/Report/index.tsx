@@ -13,18 +13,21 @@ const isBetween = (
 };
 
 const mapStateToProps = (state: State) => {
-  const nearestMonday = getClosestDayOfWeek("Mon");
-  const currentDay = new Date();
+  const startDay = getClosestDayOfWeek("Mon");
+  const endDay = getClosestDayOfWeek("Fri");
+
   const events = Object.keys(state.events).map((id) => state.events[id]);
 
   const weekEvents = events.filter((event) => {
     const [year, month, day] = event?.date.split("-").map(Number);
     const eventDay = new Date(year, month - 1, day);
 
-    return isBetween(eventDay, nearestMonday, currentDay);
+    return isBetween(eventDay, startDay, endDay);
   });
 
   return {
+    startDay: +startDay,
+    endDay: +endDay,
     events: weekEvents,
   };
 };

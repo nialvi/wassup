@@ -43,12 +43,16 @@ describe("Report view", () => {
     const { getByText } = render(
       <Provider store={store}>
         <RouterProvider router={router}>
-          <Report events={events} />
+          <Report
+            events={events}
+            startDay={1591730911228}
+            endDay={1591730911228}
+          />
         </RouterProvider>
       </Provider>
     );
 
-    expect(getByText("Weekly report")).toBeInTheDocument();
+    expect(getByText("09.06 - 09.06 2020")).toBeInTheDocument();
   });
 
   it("render report without router provider", () => {
@@ -60,7 +64,11 @@ describe("Report view", () => {
     const { getByText } = render(
       <Provider store={store}>
         <RouterProvider router={router}>
-          <Report events={events} />
+          <Report
+            events={events}
+            startDay={1591730911228}
+            endDay={1591730911228}
+          />
         </RouterProvider>
       </Provider>
     );
