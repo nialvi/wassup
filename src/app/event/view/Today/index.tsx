@@ -17,12 +17,14 @@ const Today = (props: IProps) => {
   const { addEvent, events } = props;
   const [eventCategory, setEventCategory] = useState("");
   const [eventName, setEventName] = useState("");
+  const [eventLink, setEventLink] = useState("");
   const [eventDescription, setEventDescription] = useState("");
 
   const onAddEvent = () => {
     addEvent({
       category: eventCategory,
       title: eventName,
+      link: eventLink,
       description: eventDescription,
       date: format(new Date(), "yyyy-MM-dd"),
     });
@@ -30,6 +32,7 @@ const Today = (props: IProps) => {
     setEventCategory("");
     setEventName("");
     setEventDescription("");
+    setEventLink("");
   };
 
   function onBlur() {
@@ -48,8 +51,12 @@ const Today = (props: IProps) => {
     setEventCategory(value);
   };
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeInputName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEventName(e.target.value);
+  };
+
+  const onChangeInputLink = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEventLink(e.target.value);
   };
 
   const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -87,9 +94,15 @@ const Today = (props: IProps) => {
           </Select>
 
           <Input
+            placeholder="link"
+            value={eventLink}
+            onChange={onChangeInputLink}
+          />
+
+          <Input
             placeholder="name"
             value={eventName}
-            onChange={onChangeInput}
+            onChange={onChangeInputName}
           />
 
           <Input.TextArea
@@ -113,7 +126,9 @@ const Today = (props: IProps) => {
           {events.map((event, index) => (
             <React.Fragment key={event.id}>
               <Title level={4}>
-                {index + 1} - {event.title}
+                {index + 1} -{" "}
+                {event.link && <a href={event.link}>{event.link}</a>}{" "}
+                {event.title}
               </Title>
               {event.description.map((description) => (
                 <Paragraph key={`${event.id}_${description.length}`}>

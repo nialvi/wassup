@@ -3,6 +3,7 @@ import { Dictionary } from "../../utils/types";
 export interface IEvent {
   category: string;
   title: string;
+  link?: string;
   description: string;
   date: string;
 }

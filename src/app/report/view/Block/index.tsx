@@ -19,7 +19,11 @@ const Block = ({ category, events }: IProps) => {
       {events.map((event, index) => {
         return (
           <div>
-            <Title level={4}>{`${index + 1} - ${event.title}`}</Title>
+            <Title level={4}>
+              {index + 1} -{" "}
+              {event.link && <a href={event.link}>{event.link}</a>}{" "}
+              {event.title}
+            </Title>
             {event.description.map((desc) => {
               return <Paragraph>{desc}</Paragraph>;
             })}
