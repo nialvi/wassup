@@ -4,8 +4,9 @@ import { useRouteNode } from "react-router5";
 
 import { ISystemEvent } from "../../Event/entity/interface";
 import { getTitle } from "./helper";
+import Block from "./Block";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 interface IProps {
   events: ISystemEvent[];
@@ -42,27 +43,12 @@ const Report = ({ events, startDay, endDay }: IProps) => {
     <div>
       <Typography>
         <Title>{getTitle(startDay, endDay)}</Title>
-
-        {Object.keys(eventByCategories).map((category) => {
-          return (
-            <div>
-              <Title level={2} style={{ marginTop: "24px" }}>
-                {category}
-              </Title>
-
-              {eventByCategories[category].map((event, index) => {
-                return (
-                  <div>
-                    <Title level={4}>{`${index + 1} - ${event.title}`}</Title>
-                    {event.description.map((desc) => {
-                      return <Text>{desc}</Text>;
-                    })}
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+        {eventByCategories.meetup?.length && (
+          <Block category="Meetups" events={eventByCategories.meetup} />
+        )}
+        {eventByCategories.task?.length && (
+          <Block category="Задачи" events={eventByCategories.task} />
+        )}
       </Typography>
     </div>
   );
